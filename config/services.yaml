@@ -22,3 +22,25 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Service\WeatherService:
+        arguments:
+            $apiKey: '%env(OPENWEATHER_API_KEY)%'
+            $apiUrl: '%env(OPENWEATHER_API_URL)%'
+            $apiImgUrl: '%env(OPENWEATHER_IMG_URL)%'
+            $request: '@request_stack'
+    App\Service\WeatherReportService:
+        arguments:
+            $request: '@request_stack'
+    App\Service\ApiKeyService:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $apiKeyRepository: '@App\Repository\ApiKeyRepository'
+    App\EventListener\ApiKeyHeaderListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 10 }
+        arguments:
+            $apiKeyService: '@App\Service\ApiKeyService'
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.exception', priority: 10 }
+
