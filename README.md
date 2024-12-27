@@ -18,7 +18,6 @@ docker-compose -f docker-compose.yml up
 ### Step 3: Running application for first time
 If you’re running the application for the first time, execute the following command
 ```bash
-docker run --user $(id -u):$(id -g)
 docker exec -it weather-app-web-1 /bin/bash -c "./setup.sh"
 ```
 Open your .env file and edit OPENWEATHER_API_KEY
