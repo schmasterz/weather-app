@@ -49,8 +49,6 @@ class ApiKeyServiceTest extends TestCase
             ->willReturn(new ApiKey());
 
         $result = $this->apiKeyService->generateAndSaveApiKey($name);
-
-        echo 'baba';
     }
 
     public function testDeleteApiKey()
