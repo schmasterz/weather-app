@@ -40,7 +40,6 @@ class ApiKeyServiceTest extends TestCase
     public function testGenerateAndSaveApiKey()
     {
         $name = 'test-api-key';
-        $encodedApiKey = 'null'; // This is the expected encoded API key
 
         $this->apiKeyRepository
             ->expects($this->once())
@@ -48,7 +47,7 @@ class ApiKeyServiceTest extends TestCase
             ->withAnyParameters()
             ->willReturn(new ApiKey());
 
-        $result = $this->apiKeyService->generateAndSaveApiKey($name);
+        $this->apiKeyService->generateAndSaveApiKey($name);
     }
 
     public function testDeleteApiKey()
